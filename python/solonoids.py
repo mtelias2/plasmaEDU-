@@ -28,12 +28,12 @@ def main():
 
     #% Contour map of B-field isolines
     Bnorm = np.zeros((Px.size,Py.size))
-    print(Bnorm)
+
     for i in range(0,Px.size):
         for j in range(0,Py.size):
             P = [ Px[i], Py[j], Pz ]
             B = bf.bfield(P)
-            Bnorm[i][j] = np.sqrt( B[0]*B[0] + B[1]*B[1] + B[2]*B[3] )
+            Bnorm[i][j] = np.sqrt( B[0]*B[0] + B[1]*B[1] + B[2]*B[2] )
 
 
 
@@ -43,29 +43,24 @@ def main():
 
     #% Fieldlines
     #% (Set: coordinates of the seed points, direction, length along 's', ds_maxstep  )
-    Y0x       = [ -0.1*ones(1,11),  0.1*ones(1,11),  0.1*ones(1,11),  0.3*ones(1,11)  ]
-    Y0y       = [  np.arange(0.0,0.03,0.003),  np.arange(0.0,0.06,0.006),  np.arange(0.0,0.06,0.006),  np.arange(0.0,0.03,0.003)]
-    Y0z       = [  0.0*ones(1,11),  0.0*ones(1,11),  0.0*ones(1,11),  0.0*ones(1,11)  ]
-    direction = [  1.0*ones(1,11),  1.0*ones(1,11), -1.0*ones(1,11), -1.0*ones(1,11)  ]
-    length    = [  0.4*ones(1,11),  0.3*ones(1,11),  0.3*ones(1,11),  0.4*ones(1,11)  ]
-    #options   = odeset( 'maxstep', 2.0e-3 );
-    for i in range(0,Y0y.size)
-        Y0 = [ Y0x[i], Y0y[i],Y0z[i],direction[i] ]
+    Y0x       = np.array([ -0.1*np.ones(11),  0.1*np.ones(11),  0.1*np.ones(11),  0.3*np.ones(11)  ])
+    Y0y       = np.array([  np.arange(0.0,0.03,0.003),  np.arange(0.0,0.06,0.006),  np.arange(0.0,0.06,0.006),  np.arange(0.0,0.03,0.003)])
+    Y0z       = np.array([  0.0*np.ones(11),  0.0*np.ones(11),  0.0*np.ones(11),  0.0*np.ones(11)  ])
+    direction = np.array([  1.0*np.ones(11),  1.0*np.ones(11), -1.0*np.ones(11), -1.0*np.ones(11)  ])
+    length    = np.array([  0.4*np.ones(11),  0.3*np.ones(11),  0.3*np.ones(11),  0.4*np.ones(11)  ])
+
+    #options   = odeset( 'maxstep', 2.0e-3 )
+    for i in range(0,Y0y.shape[0]):
+        Y0 = np.array([ Y0x[i], Y0y[i],Y0z[i],direction[i]])
         #s,y = ode113( @ blines, [ 0.0 length(i) ], Y0, options);
     #    plot3( y(:,1), y(:,2), y(:,3), 'k-' )
-    #end
 
+    #% Set a view
+    #view([0 0 1])
+
+    #% Print figure on file
+    #print( '-f1', '-dpdf', 'fig01' )
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-#% Set a view
-#view([0 0 1])
-
-#% Print figure on file
-#print( '-f1', '-dpdf', 'fig01' )

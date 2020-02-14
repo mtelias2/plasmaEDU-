@@ -16,9 +16,10 @@ def ROT(Nhat):
     cphi  = Nxy/Nnorm;
     sphi  = Nz/Nnorm;
 
+
     R0 = np.array([[0,0,1],[1,0,0],[0,1,0]])
     R1 = np.array([[cphi,0,sphi],[0,1,0],[-sphi,0,cphi]])
     R2 = np.array([[cth,-sth,0],[sth,cth,0],[0,0,1]])
 
-    ROT = R0 * R1 * R2
+    ROT = (R0.dot(R1)).dot(R2)
     return ROT

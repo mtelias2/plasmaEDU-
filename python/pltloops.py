@@ -3,10 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import config as cfg
 import roto as roto
+from mpl_toolkits import mplot3d
+
 
 def plot3D_currentloops(nSamplePoints,FigureID):
 
     plt.figure( FigureID )
+    ax = plt.axes(projection='3d')
+
 
     for ii in range(0 ,cfg.CurrentLoops.shape[0]):
         oclab   =   cfg.CurrentLoops[ii][0:3]
@@ -34,19 +38,16 @@ def plot3D_currentloops(nSamplePoints,FigureID):
             CurrentLoopY[jj] = oclab[1] + ROT_LAB_LOOP[1].dot(multiply)
             CurrentLoopZ[jj] = oclab[2] + ROT_LAB_LOOP[2].dot(multiply)
 
-
+    print(CurrentLoopX)
 #    % plot 3D loop center
-#    plot3( OC_LAB(1), OC_LAB(2), OC_LAB(3), 'ko');
-#    hold on
+    ax.scatter3D(  oclab[0], oclab[1], oclab[2])
+    ax.hold(True)
 
-#    % plot 3D loop coil
-#    plot3( CurrentLoopX, CurrentLoopY, CurrentLoopZ, 'k*-' )
-
-#end
-
-#grid on
-#axis equal
-
-#xlabel('X')
-#ylabel('Y')
-#zlabel('Z')
+    #% plot 3D loop coil
+    ax.plot3D( CurrentLoopX, CurrentLoopY, CurrentLoopZ )
+    plt.grid()
+    ax.set_xlabel("X")
+    ax.set_ylabel("Y")
+    ax.set_zlabel("Z")
+    plt.show()
+    ax.hold(False)
