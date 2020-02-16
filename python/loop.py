@@ -1,5 +1,5 @@
 #function [ Br, Bz ] = loop ( R, Z, I0, Ra, N_windings )
-import mpmath as mp
+#import mpmath as mp
 #need to import ellipk function
 import numpy as np
 
@@ -12,8 +12,10 @@ def loop( R, Z, I0, Ra, N_windings ):
 
     ksq   = 4.0 * alfa / Q
 
-    K =mp.ellipk(ksq)
-    E=mp.ellipe(ksq)
+    #K =mp.ellipk(ksq)
+    #E=mp.ellipe(ksq)
+    K=1.57
+    E=1.57
 
     B0    = mu0/2.0/Ra * I0 * N_windings
     Br    = gamma * B0/np.pi/np.sqrt(Q) * ( E * (1+alfa**2+beta**2)/(Q-4*alfa) - K )

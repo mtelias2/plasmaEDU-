@@ -38,7 +38,6 @@ def plot3D_currentloops(nSamplePoints,FigureID):
             CurrentLoopY[jj] = oclab[1] + ROT_LAB_LOOP[1].dot(multiply)
             CurrentLoopZ[jj] = oclab[2] + ROT_LAB_LOOP[2].dot(multiply)
 
-    print(CurrentLoopX)
 #    % plot 3D loop center
     ax.scatter3D(  oclab[0], oclab[1], oclab[2])
     ax.hold(True)

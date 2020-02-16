@@ -46,7 +46,7 @@ def bfield(P):
         ROT_LAB_LOOP =  roto.ROT( nh )
 
         #    % Roto-traslation of the P point
-        variable2   =oplab-oclab
+        variable2   = oplab-oclab
         P_LOOP      = ROT_LAB_LOOP.dot(variable2)
         R           = P_LOOP[2]
         Z           = P_LOOP[1]

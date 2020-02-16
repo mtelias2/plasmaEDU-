@@ -5,12 +5,15 @@
 #importing needed libraries
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.integrate import odeint
+
 
 # global variables Current loops and others done in config
 import config as cfg
 import roto as roto
 import pltloops as pllt
 import bfield as bf
+import blines as bl
 
 
 def main():
@@ -48,11 +51,12 @@ def main():
     Y0z       = np.array([  0.0*np.ones(11),  0.0*np.ones(11),  0.0*np.ones(11),  0.0*np.ones(11)  ])
     direction = np.array([  1.0*np.ones(11),  1.0*np.ones(11), -1.0*np.ones(11), -1.0*np.ones(11)  ])
     length    = np.array([  0.4*np.ones(11),  0.3*np.ones(11),  0.3*np.ones(11),  0.4*np.ones(11)  ])
-
     #options   = odeset( 'maxstep', 2.0e-3 )
+
     for i in range(0,Y0y.shape[0]):
-        Y0 = np.array([ Y0x[i], Y0y[i],Y0z[i],direction[i]])
-        #s,y = ode113( @ blines, [ 0.0 length(i) ], Y0, options);
+        Y0 = np.array([ Y0x[i], Y0y[i],Y0z[i],direction[i])
+        x=np.arange(0.0,length[i],2.0**(-3))
+        y = odeint(bl.blines, Y0, x)
     #    plot3( y(:,1), y(:,2), y(:,3), 'k-' )
 
     #% Set a view
