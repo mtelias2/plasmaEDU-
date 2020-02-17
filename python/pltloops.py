@@ -49,4 +49,3 @@ def plot3D_currentloops(nSamplePoints,FigureID):
     ax.set_ylabel("Y")
     ax.set_zlabel("Z")
     plt.show()
-    ax.hold(False)

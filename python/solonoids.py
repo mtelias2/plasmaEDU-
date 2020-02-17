@@ -20,6 +20,7 @@ def main():
 
     figureNumber=1
     plt.figure(figureNumber)
+
     #plotting the current loops
     pllt.plot3D_currentloops(100,figureNumber)
 
@@ -39,9 +40,11 @@ def main():
             Bnorm[i][j] = np.sqrt( B[0]*B[0] + B[1]*B[1] + B[2]*B[2] )
 
 
-
-#    XX,YY = meshgrid(Px,Py);
-    #contour(XX',YY',Bnorm, 250)
+    plt.figure( 1)
+    ax = plt.axes(projection='3d')
+    ax.hold(True)
+    XX,YY = np.meshgrid(Px,Py);
+    ax.contour(XX,YY,np.transpose(Bnorm))
     #axis equal
 
     #% Fieldlines
@@ -53,11 +56,25 @@ def main():
     length    = np.array([  0.4*np.ones(11),  0.3*np.ones(11),  0.3*np.ones(11),  0.4*np.ones(11)  ])
     #options   = odeset( 'maxstep', 2.0e-3 )
 
-    for i in range(0,Y0y.shape[0]):
-        Y0 = np.array([ Y0x[i], Y0y[i],Y0z[i],direction[i])
-        x=np.arange(0.0,length[i],2.0**(-3))
-        y = odeint(bl.blines, Y0, x)
-    #    plot3( y(:,1), y(:,2), y(:,3), 'k-' )
+
+
+    for i in range(0,Y0y.shape[1]):
+        for j in range(0,Y0y.shape[0]):
+            Y0 = np.array([ Y0x[j][i], Y0y[j][i],Y0z[j][i],direction[j][i]])
+            x=np.arange(0.0,length[j][i],2.0**(-3))
+            y= odeint(bl.blines, Y0, x)
+
+            y=np.array(np.transpose(y))
+            #% plot 3D loop coil
+            ax.plot3D( y[0], y[1], y[2] )
+            plt.grid()
+            ax.set_xlabel("X")
+            ax.set_ylabel("Y")
+            ax.set_zlabel("Z")
+
+
+    plt.show()
+    ax.hold(False)
 
     #% Set a view
     #view([0 0 1])
