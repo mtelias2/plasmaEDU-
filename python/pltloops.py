@@ -38,14 +38,13 @@ def plot3D_currentloops(nSamplePoints,FigureID):
             CurrentLoopY[jj] = oclab[1] + ROT_LAB_LOOP[1].dot(multiply)
             CurrentLoopZ[jj] = oclab[2] + ROT_LAB_LOOP[2].dot(multiply)
 
-#    % plot 3D loop center
-    ax.scatter3D(  oclab[0], oclab[1], oclab[2])
-    ax.hold(True)
+#           % plot 3D loop center
+        ax.scatter3D(  oclab[0], oclab[1], oclab[2])
+        ax.hold(True)
 
-    #% plot 3D loop coil
-    ax.plot3D( CurrentLoopX, CurrentLoopY, CurrentLoopZ )
-    plt.grid()
-    ax.set_xlabel("X")
-    ax.set_ylabel("Y")
-    ax.set_zlabel("Z")
-    plt.show()
+        #% plot 3D loop coil
+        ax.plot3D( CurrentLoopX, CurrentLoopY, CurrentLoopZ )
+        plt.grid()
+        ax.set_xlabel("X")
+        ax.set_ylabel("Y")
+        ax.set_zlabel("Z")

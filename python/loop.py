@@ -1,5 +1,5 @@
 #function [ Br, Bz ] = loop ( R, Z, I0, Ra, N_windings )
-#import mpmath as mp
+import mpmath as mp
 #need to import ellipk function
 import numpy as np
 
