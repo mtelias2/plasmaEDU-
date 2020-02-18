@@ -21,7 +21,7 @@ def main():
     figureNumber=1
 
     #plotting the current loops
-    plt.figure( figureNumber )
+    fig= plt.figure( figureNumber )
     ax = plt.axes(projection='3d')
     nSamplePoints=100
 
@@ -64,8 +64,8 @@ def main():
 
 
     #% Grid of points for contour map of B-field isolines
-    Px =    np.array([-0.1 , 0.2/45  , 0.30])
-    Py =    np.array([0.001 , 0.15/40 , 0.15])
+    Px =    np.arange(-0.1  ,0.30, 0.2/45 )
+    Py =    np.arange(0.001 , 0.15, 0.15/40 )
     Pz =    np.array(0.0)
 
     #% Contour map of B-field isolines
@@ -78,8 +78,8 @@ def main():
             Bnorm[i][j] = np.sqrt( B[0]*B[0] + B[1]*B[1] + B[2]*B[2] )
 
 
-#    XX,YY = np.meshgrid(Px,Py);
-#    ax.contour(XX,YY,np.transpose(Bnorm))
+    XX,YY = np.meshgrid(Px,Py);
+    ax.contour(np.transpose(XX),np.transpose(YY),Bnorm,25)
     #axis equal
 
     #% Fieldlines
@@ -106,12 +106,11 @@ def main():
             ax.set_xlabel("X")
             ax.set_ylabel("Y")
             ax.set_zlabel("Z")
-        print(i)
     plt.show()    #% Set a view
     #view([0 0 1])
 
     #% Print figure on file
-    plt.savefig("magnetic_field.png")
+    fig.savefig("magnetic_field.pdf")
 
 
 if __name__ == '__main__':
